@@ -18,9 +18,15 @@ function App() {
             type="text" 
             id="JobInput" 
             onChange={(e) => {setSearch(e.target.value)}}/> 
+
+        <button id = "searchButton" onClick={()=>{
+        console.log(searchText)
+          setInput(searchText)
+        }}>search
+        </button>
         
         <img id = "searchIcon" 
-        src="https://uxwing.com/wp-content/themes/uxwing/download/user-interface/search-icon.png" 
+        src="/icons/search-icon.png" 
         alt="" 
         onClick={() => { 
           console.log(searchText)
