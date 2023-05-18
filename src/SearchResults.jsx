@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import jobs from "./googleScraper.mjs"
 
 function Results({props}) {
     const [jobsVisable, setVisable] = useState(true)
@@ -15,6 +16,7 @@ function Results({props}) {
                 <h1>No job Entered</h1>
             </div>
         )
+
     }else{
 
         return(
@@ -27,7 +29,8 @@ function Results({props}) {
                     {jobsVisable ?
                     jobs.map((title) =>(
                     <JobComponent job = {title}/>
-                    )): ()=>{}}
+                    )): 
+                    ()=>{}}
                 </div>
 
                 
