@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import jobs from "./googleScraper.mjs"
-
 function Results({props}) {
     const [jobsVisable, setVisable] = useState(true)
 
