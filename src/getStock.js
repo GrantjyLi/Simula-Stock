@@ -1,16 +1,28 @@
-//npm install --save @polygon.io/client-js
+const request = require('request');
+let myKey = "297df47f70a8438bb3329c6b9e2499db";
 
-const key = "w2pe44x9R7OfO3tvwL3Cfo3RrK8VureD"
+async function getPrice(tickers){
 
+    var url = 'https://api.twelvedata.com/price?symbol=' + tickers.toString() + ' &apikey=' + myKey;
 
-const { restClient } = require('@polygon.io/client-js');
-const rest = restClient(key, "https://api.polygon.io");
+    request.get({
+        
+        url: url,
+        json: true,
+        headers: {'User-Agent': 'request'}
+    
+    }, (err, res, data) => {
+        
+        if (err) {
+            console.log('Error:', err);
+        } else if (res.statusCode !== 200) {
+            console.log('Status:', res.statusCode);
+        } else {
+            // data is successfully parsed as a JSON object:
+            console.log(data);
+        }   
+    });
+}
 
-
-rest.stocks.aggregates("AAPL", 1, "day", "2023-04-012", "2023-04-14").then((data) => {
-	console.log(data);
-}).catch(e => {
-	console.error('An error happened:', e);
-});
-
-//https://api.polygon.io/v2/aggs/ticker/AAPL/prev?adjusted=true&apiKey=w2pe44x9R7OfO3tvwL3Cfo3RrK8VureD
+let stocks = ["AAPL", "GOOGL"]
+getPrice(stocks)
