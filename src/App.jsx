@@ -13,27 +13,20 @@ function App() {
       <Header /> 
       
       <div className='Input'>
-        <h1 id = 'EnterQeury'>Enter Job Title</h1>
+        <h1 id = 'EnterQeury'>Enter Company's stock Title</h1>
         <input 
-            type="text" 
-            id="JobInput" 
-            onChange={(e) => {setSearch(e.target.value)}}/> 
+          type="text" 
+          id="JobInput" 
+          onChange={(e) => {setSearch(e.target.value)}}
+        /> 
 
         <button id = "searchButton" onClick={()=>{
-        console.log(searchText)
+          console.log(searchText + " is searched")
+          console.log("pizza");
           setInput(searchText)
         }}>search
         </button>
         
-        <img id = "searchIcon" 
-        src="/icons/search-icon.png" 
-        alt="" 
-        onClick={() => { 
-          console.log(searchText)
-          setInput(searchText)
-          
-        }}/>
-            
         {<SearchResult props = {input}/>}
         
       </div>
