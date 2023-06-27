@@ -1,56 +1,66 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Axios from 'axios'
+import './input.css'
 
 const myKey = "297df47f70a8438bb3329c6b9e2499db";
-function Results({props}) {
-    const [jobsVisable, setVisable] = useState(true)
+function Results() {
+    const [stockData, setData] = useState("")
+    const [inputText, setInput] = useState("")
+    const [searchText, setSearch] = useState("")
 
-    const jobs =[]
-
+    let url;
     const getData = ()=>{
-        props = props.trim()
-        let url = 'https://api.twelvedata.com/price?symbol=' + props + '&apikey=' + myKey;
-        console.log(url);
-        Axios.get(url).then((data)=>{
-            console.log(data);
+        url = 'https://api.twelvedata.com/price?symbol=' + searchText + '&apikey=' + myKey;
+
+        if(searchText === ""){return}
+
+        Axios.get(url).then((response)=>{
+            console.log(searchText + " is searched")
+            setData(searchText + ": $"+ parseFloat(response.data.price).toFixed(2))
+            console.log(response)
+            
         })
     }
+   
+    return(
+        <div>  
+            <div className="input">
+                <h1 id = 'EnterQeury'>Enter Company's stock Title</h1>
+                
+                <input 
+                    type="text" 
+                    id="nameInput" 
+                    onChange={(e) => {setInput(e.target.value)}}
+                /> 
 
-    if (props === ""){
-        return(
-            <div>
-                <h1>No name Entered</h1>
+                <button id = "searchButton" onClick={()=>{
+                        setSearch(inputText)
+                        getData()
+                    }
+
+                }>search
+                </button>
+
             </div>
-        )
 
-    }else{
-        console.log("cheese");
-        getData()
-        return(
             <div className="DropDownMenu">
-                <div onClick={()=>setVisable(!jobsVisable)}>
-                    <h1>Jobs:</h1>
-                </div>
 
                 <div className="Items">
-                    {jobsVisable ? jobs.map((title) =>(
-                    
-                    <JobComponent job = {title}/>
-                    
-                    )): 
-                    ()=>{}}
+                    {stockData}
+                    <JobComponent job = {stockData}/>
+                        
                 </div>
 
-                
             </div>
-        )
-    }
+        </div>
+    )
 }
 
-function JobComponent({job}){
+
+function JobComponent({data}){
     return(
         <div className="DropDownItem">
-            <h1>{job}</h1>
+            <h1>{data}</h1>
         </div>
     )
 
