@@ -1,25 +1,34 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Axios from 'axios'
 import './input.css'
 
 const myKey = "297df47f70a8438bb3329c6b9e2499db";
+const stockList =[]
 function Results() {
+    //state elements
     const [stockData, setData] = useState("")
-    const [inputText, setInput] = useState("")
     const [searchText, setSearch] = useState("")
 
+    //getting data using api
     let url;
     const getData = ()=>{
+        if(searchText === ""){return}
         url = 'https://api.twelvedata.com/price?symbol=' + searchText + '&apikey=' + myKey;
 
-        if(searchText === ""){return}
-
+        //using Axios to get an API response
         Axios.get(url).then((response)=>{
+
+            if(response.data.code === 400){
+                console.log(searchText + " was not found");
+                return
+            }
+
+            //handling valid data return
             console.log(searchText + " is searched")
             setData(searchText + ": $"+ parseFloat(response.data.price).toFixed(2))
-            console.log(response)
-            
+            stockList.push({"name" : searchText, "data": response})
         })
+        console.log(stockList);
     }
    
     return(
@@ -30,15 +39,12 @@ function Results() {
                 <input 
                     type="text" 
                     id="nameInput" 
-                    onChange={(e) => {setInput(e.target.value)}}
+                    onChange={(e) => {setSearch(e.target.value)}}
                 /> 
 
-                <button id = "searchButton" onClick={()=>{
-                        setSearch(inputText)
-                        getData()
-                    }
+                <button id = "searchButton" onClick={getData}
 
-                }>search
+                >Add Stock name
                 </button>
 
             </div>
@@ -47,10 +53,8 @@ function Results() {
 
                 <div className="Items">
                     {stockData}
-                    <JobComponent job = {stockData}/>
-                        
+                    <JobComponent job = {stockData}/>  
                 </div>
-
             </div>
         </div>
     )
