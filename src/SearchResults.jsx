@@ -6,7 +6,6 @@ const myKey = "297df47f70a8438bb3329c6b9e2499db";
 const stockList =[]
 function Results() {
     //state elements
-    const [stockData, setData] = useState("")
     const [searchText, setSearch] = useState("")
 
     //getting data using api
@@ -17,15 +16,24 @@ function Results() {
 
         //using Axios to get an API response
         Axios.get(url).then((response)=>{
+            
+            let b = false
+            stockList.forEach(stock => {
+                if(stock.name === searchText){
+                    console.log("stock was already found");
+                    b = true
+                    return;
+                }
+            });if(b){return}
+            
 
             if(response.data.code === 400){
                 console.log(searchText + " was not found");
-                return
+                return;
             }
 
             //handling valid data return
             console.log(searchText + " is searched")
-            setData(searchText + ": $"+ parseFloat(response.data.price).toFixed(2))
             stockList.push({"name" : searchText, "data": response})
         })
         console.log(stockList);
@@ -52,8 +60,11 @@ function Results() {
             <div className="DropDownMenu">
 
                 <div className="Items">
-                    {stockData}
-                    <JobComponent job = {stockData}/>  
+                    {stockList.map(stock =>(
+                        <JobComponent data ={stock}/>
+                    ))
+                    }
+
                 </div>
             </div>
         </div>
@@ -64,7 +75,7 @@ function Results() {
 function JobComponent({data}){
     return(
         <div className="DropDownItem">
-            <h1>{data}</h1>
+            <h1>{data.name + ": $" + parseFloat(data.data.data.price).toFixed(2)}</h1>
         </div>
     )
 
