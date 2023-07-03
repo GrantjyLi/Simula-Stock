@@ -3,10 +3,10 @@ import Axios from 'axios'
 import './input.css'
 
 const myKey = "297df47f70a8438bb3329c6b9e2499db";
-const stockList =[]
 function Results() {
     //state elements
     const [searchText, setSearch] = useState("")
+    const [stockList, setList] = useState([])
 
     //getting data using api
     let url;
@@ -34,7 +34,12 @@ function Results() {
 
             //handling valid data return
             console.log(searchText + " is searched")
-            stockList.push({"name" : searchText, "data": response})
+            const arr = [...stockList, {
+                "name" : searchText, 
+                "data": response
+            }]
+            
+            setList(arr)
         })
         console.log(stockList);
     }
@@ -50,9 +55,8 @@ function Results() {
                     onChange={(e) => {setSearch(e.target.value)}}
                 /> 
 
-                <button id = "searchButton" onClick={getData}
-
-                >Add Stock name
+                <button id = "searchButton" onClick={getData}>
+                    Add Stock name
                 </button>
 
             </div>
