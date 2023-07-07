@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Axios from 'axios'
-import './input.css'
+import './SearchResults.css'
+import JobComponent from './JobComponent.jsx'
 
 const myKey = "297df47f70a8438bb3329c6b9e2499db";
 function Results() {
@@ -73,15 +74,5 @@ function Results() {
             </div>
         </div>
     )
-}
-
-
-function JobComponent({data}){
-    return(
-        <div className="DropDownItem">
-            <h1>{data.name + ": $" + parseFloat(data.data.data.price).toFixed(2)}</h1>
-        </div>
-    )
-
 }
 export default Results;

@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
 import './App.css'
-import Header from './header.jsx'
-import SearchResult from './SearchResults.jsx'
+import Header from './Header/header.jsx'
+import SearchResult from './SearchResults/SearchResults.jsx'
 
 function App() {
   
