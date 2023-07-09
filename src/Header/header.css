@@ -4,8 +4,6 @@
 .HeaderMain{
     font-family: Arial, Helvetica, sans-serif;
     color: white;
-    background: rgba(0,212,255,1) 100%;
-    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(108,9,121,1) 35%, rgba(0,212,255,1) 100%);
     padding: 20px;
     margin: 0;
     

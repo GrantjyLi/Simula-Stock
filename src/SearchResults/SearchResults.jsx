@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Axios from 'axios'
 import './SearchResults.css'
-import JobComponent from './JobComponent.jsx'
+import JobComponent from './TickerComponent.jsx'
+import searchIcon from './images/search-icon.png'
 
 const myKey = "297df47f70a8438bb3329c6b9e2499db";
 function Results() {
@@ -46,19 +47,17 @@ function Results() {
     }
    
     return(
-        <div>  
-            <div className="input">
-                <h1 id = 'EnterQeury'>Enter Company's stock Title</h1>
+        <div className="SearchResults">  
+            <div id="input">
                 
                 <input 
                     type="text" 
-                    id="nameInput" 
+                    id="textInput" 
+                    defaultValue = "Enter stock"
                     onChange={(e) => {setSearch(e.target.value)}}
+                    
                 /> 
-
-                <button id = "searchButton" onClick={getData}>
-                    Add Stock name
-                </button>
+                <img src={searchIcon} onClick={getData}/>
 
             </div>
 
