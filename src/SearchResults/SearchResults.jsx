@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import Axios from 'axios'
 import './SearchResults.css'
 import JobComponent from './TickerComponent.jsx'
@@ -53,11 +53,13 @@ function Results() {
                 <input 
                     type="text" 
                     id="textInput" 
-                    defaultValue = "Enter stock"
+                    placeholder = "Enter stock Ticker Name"
                     onChange={(e) => {setSearch(e.target.value)}}
+                    onKeyPress = {(e) =>{ if (e.key === "Enter") getData()}}
+                    tabIndex = "0"
                     
                 /> 
-                <img src={searchIcon} onClick={getData}/>
+                <img id = "searchIcon" src={searchIcon} onClick={getData}/>
 
             </div>
 
