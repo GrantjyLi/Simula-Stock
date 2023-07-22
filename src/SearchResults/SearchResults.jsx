@@ -1,7 +1,7 @@
 import React, { useState} from "react";
 import Axios from 'axios'
 import './SearchResults.css'
-import JobComponent from './TickerComponent.jsx'
+import TickerComponent from './TickerComponent.jsx'
 import searchIcon from './images/search-icon.png'
 
 const myKey = "297df47f70a8438bb3329c6b9e2499db";
@@ -11,39 +11,46 @@ function Results() {
     const [stockList, setList] = useState([])
 
     //getting data using api
-    let url;
-    const getData = ()=>{
-        if(searchText === ""){return}
-        url = 'https://api.twelvedata.com/price?symbol=' + searchText + '&apikey=' + myKey;
+    let priceURL;
+    let dataURL;
+    async function getData(){
+        if(searchText === "")return
 
-        //using Axios to get an API response
-        Axios.get(url).then((response)=>{
-            
-            let b = false
-            stockList.forEach(stock => {
-                if(stock.name === searchText){
-                    console.log("stock was already found");
-                    b = true
-                    return;
-                }
-            });if(b){return}
-            
-
-            if(response.data.code === 400){
-                console.log(searchText + " was not found");
-                return;
+        let flag = false;
+        stockList.forEach(stock => {
+            if(stock.name === searchText){
+                console.log("stock was already found");
+                flag = true
+                return
             }
+        });if(flag)return
+
+        priceURL = 'https://api.twelvedata.com/price?symbol=' + searchText + '&apikey=' + myKey
+        dataURL = 'https://api.twelvedata.com/time_series?symbol='+ searchText +'&interval=0.99min&apikey=' + myKey
+        //using Axios to get an API response
+        
+        try{
+            const priceResponse = await Axios.get(priceURL);
+            
+            if(priceResponse.data.code === 400){
+                console.log(searchText + " was not found");
+                return
+            }
+
+            const dataResponse = await Axios.get(dataURL);
 
             //handling valid data return
             console.log(searchText + " is searched")
             const arr = [...stockList, {
                 "name" : searchText, 
-                "data": response
+                "data": {
+                    "price": priceResponse.data.price,
+                    "timeData": dataResponse.data}
             }]
             
             setList(arr)
-        })
-        console.log(stockList);
+        }catch(error){console.log("couldn't get data")}
+        
     }
    
     return(
@@ -67,7 +74,7 @@ function Results() {
 
                 <div className="Items">
                     {stockList.map(stock =>(
-                        <JobComponent data ={stock}/>
+                        <TickerComponent ticker ={stock}/>
                     ))
                     }
 
