@@ -1,36 +1,25 @@
-const request = require('request');
-let myKey = "297df47f70a8438bb3329c6b9e2499db";
+const apiKey = '297df47f70a8438bb3329c6b9e2499db';
+const stockSymbol = 'AAPL'; // Replace with the desired stock symbol
+const fetch = require('node-fetch');
 
-async function getCurrPrice(tickers){
+const apiUrl = `https://api.twelvedata.com/time_series?symbol=${stockSymbol}&interval=1day&apikey=${apiKey}`;
 
-    var url = 'https://api.twelvedata.com/price?symbol=' + tickers.toString() + ' &apikey=' + myKey;
+fetch(apiUrl)
+  .then(response => response.json())
+  .then(data => {
+    // The response will contain historical stock data in the 'values' field, with the latest data being the first element
+    const latestData = data.values[0];
 
-    request.get({
-        
-        url: url,
-        json: true,
-        headers: {'User-Agent': 'request'}
-    
-    }, (err, res, data) => {
-        
-        if (err) {
-            console.log('Error:', err);
-        } else if (res.statusCode !== 200) {
-            console.log('Status:', res.statusCode);
-        } else {
-            // data is successfully parsed as a JSON object:
-            console.log(data);
+    const openingPrice = latestData.open;
+    const closingPrice = latestData.close;
+    const highPrice = latestData.high;
+    const lowPrice = latestData.low;
 
-            dict = {}
-            for (let key in data) {
-
-                dict[key] = parseFloat(data[key].price)
-            }
-            console.log(dict);
-
-        }   
-    });
-}
-
-let stocks = ["AAPL", "GOOGL"]
-getCurrPrice(stocks)
+    console.log(`The most recent opening price: ${openingPrice}`);
+    console.log(`The most recent closing price: ${closingPrice}`);
+    console.log(`The highest price of the day: ${highPrice}`);
+    console.log(`The lowest price of the day: ${lowPrice}`);
+  })
+  .catch(error => {
+    console.error('Error fetching data:', error);
+  });

@@ -1,11 +1,12 @@
 #input{
     text-align: center;
-    
     color: white;
 }
 #textInput{
     border-radius: 10px;
     margin: 10px;
+    font-size: 20px;
+    font-family: Inter;
 }
 #searchIcon{
     height: 25px;

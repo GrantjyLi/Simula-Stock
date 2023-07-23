@@ -26,30 +26,27 @@ function Results() {
         });if(flag)return
 
         priceURL = 'https://api.twelvedata.com/price?symbol=' + searchText + '&apikey=' + myKey
-        dataURL = 'https://api.twelvedata.com/time_series?symbol='+ searchText +'&interval=0.99min&apikey=' + myKey
+        dataURL = 'https://api.twelvedata.com/time_series?symbol='+ searchText +'&interval=1day&apikey=' + myKey
         //using Axios to get an API response
-        
         try{
             const priceResponse = await Axios.get(priceURL);
             
             if(priceResponse.data.code === 400){
-                console.log(searchText + " was not found");
+                alert(searchText + " was not found");
                 return
             }
 
             const dataResponse = await Axios.get(dataURL);
 
             //handling valid data return
-            console.log(searchText + " is searched")
             const arr = [...stockList, {
                 "name" : searchText, 
-                "data": {
-                    "price": priceResponse.data.price,
-                    "timeData": dataResponse.data}
-            }]
+                "price": priceResponse.data.price,
+                "data": dataResponse.data}
+            ]
             
             setList(arr)
-        }catch(error){console.log("couldn't get data")}
+        }catch(error){alert("couldn't get data")}
         
     }
    
