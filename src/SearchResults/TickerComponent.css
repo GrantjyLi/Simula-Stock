@@ -1,9 +1,32 @@
 .TickerComponent{
     margin: auto;
     width: 50%;
-    height: 200px;
+    height: 16vw;
     padding: 10px;
     margin-top: 10px;
     background-color: #d9d9d9;
+    position: relative;
+    border-radius: 15px;
 
+}
+#closeButton{
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+#leftData{
+    width: 45%;
+    float: left;
+    padding-left: 5%;
+    font-size: 1.75vw;
+}
+
+#rightData{
+    width: 45%;
+    float: right;
+    padding-right: 5%;
+    font-size: 1.75vw;
 }

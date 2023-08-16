@@ -1,12 +1,15 @@
 import "./TickerComponent.css"
+import closeIcon from './images/close-icon.png'
 
 function TickerComponent({ticker}){
-
     let currentData = ticker.data.values[0]
 
     return(
         <div className="TickerComponent">
-        <h1>{ticker.data.meta.symbol}</h1>
+            <h1 id = "TickerName">{ticker.data.meta.symbol}</h1>
+
+            <img id = "closeButton" src={closeIcon} onClick={()=>{}}/>
+
             <div id = "leftData">
                 <h3>{"Share price: $" + parseFloat(ticker.price).toFixed(2)}</h3>
                 <h3>{"Latest high: $" + parseFloat(currentData.high).toFixed(2)}</h3>
