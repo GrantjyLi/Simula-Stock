@@ -49,6 +49,14 @@ function Results() {
         }catch(error){alert("couldn't get data")}
         
     }
+
+    function removeTicker(name){
+        name = name.toLowerCase()
+        setList((stocks) =>
+            stocks.filter((stock) => stock.name !== name)
+        );
+    }
+    
    
     return(
         <div className="SearchResults">  
@@ -71,7 +79,7 @@ function Results() {
 
                 <div className="Items">
                     {stockList.map(stock =>(
-                        <TickerComponent ticker ={stock}/>
+                        <TickerComponent ticker ={stock} exit = {removeTicker}/>
                     ))
                     }
 
