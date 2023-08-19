@@ -5,36 +5,48 @@
     padding: 10px;
     margin-top: 10px;
     background-color: #d9d9d9;
-    position: relative;
     border-radius: 15px;
-
+    
 }
+
+.topSection{
+    display: flex;
+    position: relative;
+}
+
+#TickerName{
+    font-size:  3.5vw;
+}
+
+#arrow{
+    height: 3.5vw;
+    width: 3.5vw;
+    float: right;
+}
+
 #closeButton{
-    height: 30px;
-    width: 30px;
+    height: 3.5vw;
+    width: 3.5vw;
+    top: 0.1vw;
+    right: 0.1vw;
     position: absolute;
-    top: 5px;
-    right: 5px;
 }
 
+.className{
+    padding-top: 4vw;
+    display: flex;
+    position: absolute;
+}
 #leftData{
     width: 45%;
     float: left;
-    padding-left: 5%;
+    padding-left: 2%;
     font-size: 1.75vw;
 }
 
 #rightData{
-    width: 45%;
+    width: 50%;
     float: right;
-    padding-right: 5%;
+    padding-right: 2%;
     font-size: 1.75vw;
-}
-
-#arrow{
-    height: 7vw;
-    width: 7vw;
-    position: absolute;
-    top: 0px;
-    padding-left: 12vw;
 }
