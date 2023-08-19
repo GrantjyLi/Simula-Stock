@@ -30,3 +30,11 @@
     padding-right: 5%;
     font-size: 1.75vw;
 }
+
+#arrow{
+    height: 7vw;
+    width: 7vw;
+    position: absolute;
+    top: 0px;
+    padding-left: 12vw;
+}
