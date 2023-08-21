@@ -4,7 +4,7 @@ import './SearchResults.css'
 import TickerComponent from './TickerComponent.jsx'
 import searchIcon from './images/search-icon.png'
 
-const myKey = "297df47f70a8438bb3329c6b9e2499db";
+const myKey = process.env.REACT_APP_12DAT_API_KEY
 function Results() {
     //state elements
     const [searchText, setSearch] = useState("")
@@ -47,7 +47,6 @@ function Results() {
             
             setList(arr)
         }catch(error){alert("couldn't get data")}
-        
     }
 
     function removeTicker(name){
@@ -57,26 +56,22 @@ function Results() {
         );
     }
     
-   
     return(
         <div className="SearchResults">  
+
             <div id="input">
-                
                 <input 
                     type="text" 
                     id="textInput" 
                     placeholder = "Enter stock Ticker Name"
                     onChange={(e) => {setSearch(e.target.value)}}
                     onKeyPress = {(e) =>{ if (e.key === "Enter") getData()}}
-                    tabIndex = "0"
-                    
+                    tabIndex = "0"    
                 /> 
                 <img id = "searchIcon" src={searchIcon} onClick={getData}/>
-
             </div>
 
             <div className="DropDownMenu">
-
                 <div className="Items">
                     {stockList.map(stock =>(
                         <TickerComponent ticker ={stock} exit = {removeTicker}/>
@@ -85,6 +80,7 @@ function Results() {
 
                 </div>
             </div>
+
         </div>
     )
 }
