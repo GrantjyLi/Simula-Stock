@@ -10,7 +10,6 @@ function TickerComponent(props){
 
     let arrow
     (currentData.close > ticker.price)? arrow = upArrow : arrow = downArrow
-    
     return(
         <div className="TickerComponent">
             <div className = "topSection">
