@@ -3,24 +3,10 @@ import Axios from 'axios'
 import './SearchResults.css'
 import TickerComponent from './TickerComponent.jsx'
 import searchIcon from './images/search-icon.png'
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { auth } from '../firebase.js'
 
 const myKey = process.env.REACT_APP_12DAT_API_KEY
 function Results() {
-
-    const auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
-    if (user) {
-        // User is signed in, see docs for a list of available properties
-        const uid = user.uid;
-        
-        console.log("User is in");
-    } else {
-        // User is signed out\
-        
-        console.log("User is out");
-    }
-    });
 
     //state elements
     const [searchText, setSearch] = useState("")
@@ -71,6 +57,16 @@ function Results() {
             stocks.filter((stock) => stock.name !== name)
         );
     }
+
+    function saveList(){
+        console.log(auth);
+        if(auth.currentUser){
+            alert("User is logged in")
+        }else{
+            
+            alert("User is logged out")
+        }
+    }
     
     return(
         <div className="SearchResults">  
@@ -86,6 +82,10 @@ function Results() {
                 /> 
                 <img id = "searchIcon" src={searchIcon} onClick={getData}/>
             </div>
+
+            <button id = "saveButton" onClick={saveList}>
+                Save List
+            </button>
 
             <div className="DropDownMenu">
                 <div className="Items">

@@ -1,3 +1,6 @@
+*{
+    border: none;}
+
 .SearchResults{
     padding-top: 20px;
 }
@@ -14,4 +17,13 @@
 #searchIcon{
     height: 25px;
     width: 25px;
+}
+#saveButton{
+    display: block;
+    margin: auto;
+    height: 5vw;
+    width: 20vw;
+    font-size: 3.5vw;
+    padding: 0;
+    border-radius: 6px;
 }
