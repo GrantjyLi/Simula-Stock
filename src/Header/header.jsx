@@ -5,7 +5,7 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from '../firebase'
 import { signOut } from 'firebase/auth';
 
-function Header() {
+function Header({setUser}) {
     const [openMenu, setOpen] = useState(false)
     const Menu = ["Profile", "Login", "Logout"]
 
@@ -13,9 +13,17 @@ function Header() {
         switch(option){
             case "Login":
                 const provider = await new GoogleAuthProvider()
-                await signInWithPopup(auth, provider)
+                try{
+                    let result = await signInWithPopup(auth, provider)
+                    setUser(result)
+                }catch(error) {alert("Couldn't log in: ", error)}
+                break
             case "Logout":
-                await signOut(auth)
+                try{
+                    await signOut(auth)
+                    setUser(null)
+                }catch(error){alert("Couldn't log out: ", error)}
+                break
         }
     }
     

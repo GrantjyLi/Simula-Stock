@@ -3,10 +3,9 @@ import Axios from 'axios'
 import './SearchResults.css'
 import TickerComponent from './TickerComponent.jsx'
 import searchIcon from './images/search-icon.png'
-import { auth } from '../firebase.js'
 
 const myKey = process.env.REACT_APP_12DAT_API_KEY
-function Results() {
+function Results({user}) {
 
     //state elements
     const [searchText, setSearch] = useState("")
@@ -59,13 +58,7 @@ function Results() {
     }
 
     function saveList(){
-        console.log(auth);
-        if(auth.currentUser){
-            alert("User is logged in")
-        }else{
-            
-            alert("User is logged out")
-        }
+        console.log(user);
     }
     
     return(
