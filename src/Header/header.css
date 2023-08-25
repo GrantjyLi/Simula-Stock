@@ -7,6 +7,7 @@
     padding-top: 20px;
     padding-right: 20px;
     display: flex;
+    position: relative;
     
 }
 #HeaderName{
@@ -20,6 +21,8 @@
     width: 5.5vw;
 }
 #Drop_down{
+    position: absolute;
+    right: 0;
     background-color: aliceblue;
     color: black;
     font-size: 2vw;
@@ -30,6 +33,7 @@
     border-radius: 4px;
     margin-right: 1vw;
 }
+
 ul{
     list-style-type: none;
 }

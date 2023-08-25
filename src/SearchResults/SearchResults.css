@@ -3,6 +3,9 @@
 
 .SearchResults{
     padding-top: 20px;
+    position: relative;
+    overflow: auto;
+    height: calc(100vh - 60px);
 }
 #input{
     text-align: center;
@@ -21,9 +24,9 @@
 #saveButton{
     display: block;
     margin: auto;
-    height: 5vw;
-    width: 20vw;
-    font-size: 3.5vw;
+    height: 3vw;
+    width: 10vw;
+    font-size: 2vw;
     padding: 0;
     border-radius: 6px;
 }
