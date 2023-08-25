@@ -3,9 +3,6 @@
 
 .SearchResults{
     padding-top: 20px;
-    position: relative;
-    overflow: auto;
-    height: calc(100vh - 60px);
 }
 #input{
     text-align: center;

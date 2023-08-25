@@ -19,6 +19,7 @@
 #login-icon{
     height: 5.5vw;
     width: 5.5vw;
+    border-radius: 50%;
 }
 #Drop_down{
     position: absolute;

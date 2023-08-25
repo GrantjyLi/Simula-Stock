@@ -1,5 +1,5 @@
 import { useState } from "react";
-import loginImage from './images/login.png'
+import defaultProfilePic from './images/login.png'
 import './Header.css'
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from '../firebase'
@@ -7,6 +7,7 @@ import { signOut } from 'firebase/auth';
 
 function Header({setUser}) {
     const [openMenu, setOpen] = useState(false)
+    const [profilePic, setprofilePic] = useState(defaultProfilePic)
     const Menu = ["Profile", "Login", "Logout"]
 
     async function menu(option){
@@ -16,12 +17,14 @@ function Header({setUser}) {
                 try{
                     let result = await signInWithPopup(auth, provider)
                     setUser(result)
+                    setprofilePic(result.user.photoURL)
                 }catch(error) {alert("Couldn't log in: ", error)}
                 break
             case "Logout":
                 try{
                     await signOut(auth)
                     setUser(null)
+                    setprofilePic(defaultProfilePic)
                 }catch(error){alert("Couldn't log out: ", error)}
                 break
         }
@@ -32,7 +35,7 @@ function Header({setUser}) {
             <div className="HeaderMain">
                 <h1 id="HeaderName">Quick Ticker Checker</h1>
                 <div>
-                    <img src={loginImage} alt="" 
+                    <img src={profilePic} alt= "" 
                     id ="login-icon" 
                     onClick={()=>{setOpen(!openMenu)}}/>
                     
