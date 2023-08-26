@@ -13,13 +13,16 @@
 #HeaderName{
     text-align: center;
     font-size: 4.5vw;
-    flex-grow: 1;
+    margin: auto;
     
 }
 #login-icon{
     height: 5.5vw;
     width: 5.5vw;
     border-radius: 50%;
+    position: absolute;
+    right: 0;
+    padding-right: 5px;
 }
 #Drop_down{
     position: absolute;

@@ -3,6 +3,8 @@ import Axios from 'axios'
 import './SearchResults.css'
 import TickerComponent from './TickerComponent.jsx'
 import searchIcon from './images/search-icon.png'
+import { firerStoreDB } from '../firebase'
+import { collection, addDoc } from "firebase/firestore";
 
 const myKey = process.env.REACT_APP_12DAT_API_KEY
 function Results({user}) {
@@ -57,8 +59,16 @@ function Results({user}) {
         );
     }
 
-    function saveList(){
+    async function saveList(){
+        try {
+            await addDoc(collection(firerStoreDB, "test"), {
+                StockList: stockList
+            })
+          } catch (e) {
+            console.error("Error adding document: ", e);
+          }
         console.log(user);
+        console.log(stockList.toString());
     }
     
     return(

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import defaultProfilePic from './images/login.png'
+import defaultProfilePic from './images/defaultPic.png'
 import './Header.css'
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from '../firebase'
