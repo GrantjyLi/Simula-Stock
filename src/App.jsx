@@ -7,10 +7,10 @@ function App() {
   const [user, setUser] = useState(null)
   
   return (
-    <div className='AppMain'>
-      <Header setUser = {setUser}/> 
-      <SearchResult user = {user}/>
-    </div>
+      <div className='AppMain'>
+        <Header setUser = {setUser}/> 
+        <SearchResult user = {user}/>
+      </div>
   )
 }
 
