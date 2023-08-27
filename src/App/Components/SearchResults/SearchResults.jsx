@@ -3,7 +3,7 @@ import Axios from 'axios'
 import './SearchResults.css'
 import TickerComponent from './TickerComponent.jsx'
 import searchIcon from './images/search-icon.png'
-import { firerStoreDB } from '../firebase'
+import { firerStoreDB } from '../../../firebase'
 import { collection, addDoc } from "firebase/firestore";
 
 const myKey = process.env.REACT_APP_12DAT_API_KEY

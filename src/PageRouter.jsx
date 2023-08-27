@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import App from './App.jsx';
-import Profile from './pages/profile/profile.jsx';
+import App from './App/App.jsx';
+import Profile from './profile/profile.jsx';
 
 export default function PageRouter(){
     return(

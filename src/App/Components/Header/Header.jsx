@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useState } from "react"
 import defaultProfilePic from './defaultPic.png'
 import './Header.css'
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { auth } from '../firebase'
-import { signOut } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth"
+import { auth } from '../../../firebase.js'
 
 function Header({setUser}) {
     const [openMenu, setOpen] = useState(false)

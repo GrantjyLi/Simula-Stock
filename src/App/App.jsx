@@ -1,6 +1,6 @@
 import './App.css'
-import Header from './Header/Header.jsx'
-import SearchResult from './SearchResults/SearchResults.jsx'
+import Header from './Components/Header/Header.jsx'
+import SearchResult from './Components/SearchResults/SearchResults.jsx'
 import {useState} from "react"
 
 function App() {
