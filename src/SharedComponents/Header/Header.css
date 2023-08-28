@@ -10,11 +10,18 @@
     position: relative;
     
 }
-#HeaderName{
+#headerName{
     text-align: center;
-    font-size: 4.5vw;
     margin: auto;
-    
+    font-size: 5vw;
+
+}
+#pageName{
+    text-align: center;
+    font-size: 2.5vw;
+    margin: auto;
+    color: white;
+
 }
 #login-icon{
     height: 5.5vw;

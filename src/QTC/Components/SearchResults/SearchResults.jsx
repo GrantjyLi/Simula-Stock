@@ -60,6 +60,11 @@ function Results({user}) {
     }
 
     async function saveList(){
+        if (!user){
+            alert("Not logged in")
+            return
+        }
+
         try {
             await addDoc(collection(firerStoreDB, "test"), {
                 StockList: stockList

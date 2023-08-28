@@ -1,5 +1,5 @@
-import './App.css'
-import Header from './Components/Header/Header.jsx'
+import './QTC.css'
+import Header from '../SharedComponents/Header/Header.jsx'
 import SearchResult from './Components/SearchResults/SearchResults.jsx'
 import {useState} from "react"
 
@@ -8,7 +8,7 @@ function App() {
   
   return (
       <div className='AppMain'>
-        <Header setUser = {setUser}/> 
+        <Header setUser = {setUser} pageName = {"Quick Ticker Checker"}/> 
         <SearchResult user = {user}/>
       </div>
   )

@@ -2,9 +2,9 @@ import { useState } from "react"
 import defaultProfilePic from './defaultPic.png'
 import './Header.css'
 import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth"
-import { auth } from '../../../firebase.js'
+import { auth } from '../../firebase.js'
 
-function Header({setUser}) {
+function Header(props) {
     const [openMenu, setOpen] = useState(false)
     const [profilePic, setprofilePic] = useState(defaultProfilePic)
     const Menu = ["Profile", "Login", "Logout"]
@@ -15,14 +15,15 @@ function Header({setUser}) {
                 const provider = await new GoogleAuthProvider()
                 try{
                     let result = await signInWithPopup(auth, provider)
-                    setUser(result)
+                    props.setUser(result)
                     setprofilePic(result.user.photoURL)
                 }catch(error) {alert("Couldn't log in: ", error)}
                 break
-            case "Logout":
+            
+                case "Logout":
                 try{
                     await signOut(auth)
-                    setUser(null)
+                    props.setUser(null)
                     setprofilePic(defaultProfilePic)
                 }catch(error){alert("Couldn't log out: ", error)}
                 break
@@ -32,7 +33,7 @@ function Header({setUser}) {
     return(
         <div className="Header">
             <div className="HeaderMain">
-                <h1 id="HeaderName">Quick Ticker Checker</h1>
+                <h1 id ="headerName">SimulaStock</h1>
                 <div>
                     <img src={profilePic} alt= "" 
                     id ="login-icon" 
@@ -40,6 +41,8 @@ function Header({setUser}) {
                     
                 </div>
             </div>
+            
+            <h1 id ="pageName">{props.pageName}</h1>
 
             {openMenu &&
                 <ul id = "Drop_down" 
