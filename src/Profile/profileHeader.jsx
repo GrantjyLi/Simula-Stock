@@ -1,8 +1,8 @@
 import { useState } from "react"
 import defaultProfilePic from './defaultPic.png'
-import './Header.css'
+import './profileHeader.css'
 import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth"
-import { auth } from '../../firebase.js'
+import { auth } from '../firebase.js'
 
 function Header(props) {
     const [openMenu, setOpen] = useState(false)
@@ -31,9 +31,9 @@ function Header(props) {
     }
     
     return(
-        <div className="Header">
-            <div className="HeaderMain">
-                <h1 id ="headerName">SimulaStock</h1>
+        <div className="profileHeader">
+            <div className="profileHeaderMain">
+                <h1 id ="profileheaderName">SimulaStock</h1>
                 <div>
                     <img src={profilePic} alt= "" 
                     id ="login-icon" 
@@ -44,13 +44,13 @@ function Header(props) {
             
 
             {openMenu &&
-                <ul id = "Drop_down" 
+                <ul id = "profileDrop_down" 
                 onClick={()=>{setOpen(!openMenu)}}>
 
                 {Menu.map((option)=>(
-                    <li id = "dropDownItem">
+                    <li id = "profiledropDownItem">
                         <button 
-                        id = "dropDownButton"
+                        id = "profiledropDownButton"
                         onClick={()=>{menu(option)}}>{option}
                         </button>
                         </li>
@@ -58,7 +58,7 @@ function Header(props) {
                 }
             </ul>
             }
-            <h1 id ="pageName">{props.pageName}</h1>
+            <h1 id ="profilepageName">{props.pageName}</h1>
 
         </div>
     )

@@ -66,7 +66,7 @@ function Results({user}) {
         }
 
         try {
-            await addDoc(collection(firerStoreDB, "test"), {
+            await addDoc(collection(firerStoreDB, "Users"), {
                 StockList: stockList
             })
           } catch (e) {
