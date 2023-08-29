@@ -12,7 +12,7 @@ function Header(props) {
     async function menu(option){
         switch(option){
             case "Login":
-                const provider = await new GoogleAuthProvider()
+                const provider = await new GoogleAuthProvider().then()
                 try{
                     let result = await signInWithPopup(auth, provider)
                     props.setUser(result)
