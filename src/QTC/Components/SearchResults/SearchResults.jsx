@@ -3,8 +3,8 @@ import Axios from 'axios'
 import './SearchResults.css'
 import TickerComponent from './TickerComponent.jsx'
 import searchIcon from './images/search-icon.png'
-import { firerStoreDB } from '../../../firebase'
-import { collection, addDoc } from "firebase/firestore";
+import { fireStoreDB } from '../../../firebase.js'
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 
 const myKey = process.env.REACT_APP_12DAT_API_KEY
 function Results({user}) {
@@ -60,20 +60,32 @@ function Results({user}) {
     }
 
     async function saveList(){
-        if (!user){
+        if (!user){ //login check
             alert("Not logged in")
             return
         }
 
+        const userRef = doc(fireStoreDB, "Users", user.user.uid);
+        const docRef = await getDoc(userRef);
+
+        if(!docRef.exists()){
+            try {
+                await setDoc(userRef, {})
+            } catch (e) {console.error("Error creating user profile: ", e); return}
+            try {
+                await setDoc(doc(fireStoreDB, "UserData", user.user.uid), {})
+            } catch (e) {console.error("Error creating user data profile: ", e); return}
+            try {
+                await setDoc(doc(fireStoreDB, "UserListInfo", user.user.uid), {numLists: 0})
+            } catch (e) {console.error("Error creating user data list data: ", e); return}
+        }
+
         try {
-            await addDoc(collection(firerStoreDB, "Users"), {
-                StockList: stockList
+            await updateDoc(doc(fireStoreDB, "UserData", user.user.uid), {
+                StockList : stockList
             })
-          } catch (e) {
-            console.error("Error adding document: ", e);
-          }
+        } catch (e) {console.error("Error storing list: ", e); return}
         console.log(user);
-        console.log(stockList.toString());
     }
     
     return(
