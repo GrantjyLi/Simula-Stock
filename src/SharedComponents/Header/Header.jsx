@@ -1,10 +1,10 @@
 import { useState } from "react"
 import defaultProfilePic from './defaultPic.png'
 import './Header.css'
-import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth"
+import { signOut } from "firebase/auth"
 import { auth } from '../../firebase.js'
 
-function Header(props) {
+function Header({props}) {
     const [openMenu, setOpen] = useState(false)
     const [profilePic, setprofilePic] = useState(defaultProfilePic)
     const Menu = ["Profile", "Login", "Logout"]
@@ -12,14 +12,9 @@ function Header(props) {
     async function menu(option){
         switch(option){
             case "Login":
-                const provider = await new GoogleAuthProvider()
-                try{
-                    let result = await signInWithPopup(auth, provider)
-                    props.setUser(result)
-                    setprofilePic(result.user.photoURL)
-                }catch(error) {alert("Couldn't log in: ", error)}
+                await props.login(setprofilePic)
+
                 break
-            
                 case "Logout":
                 try{
                     await signOut(auth)
