@@ -4,7 +4,7 @@ import './SearchResults.css'
 import TickerComponent from './TickerComponent.jsx'
 import searchIcon from './images/search-icon.png'
 import { fireStoreDB } from '../../../firebase.js'
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc, getDoc } from "firebase/firestore";
 
 const myKey = process.env.REACT_APP_12DAT_API_KEY
 function Results(props) {
@@ -67,18 +67,30 @@ function Results(props) {
         }
 
         props.userExist().then(async result =>{
-            if(result === 0){
+            if(result >= 0){
+                if (result >= 3){
+                    alert("You have ran out of lists - 3")
+                    return
+                }
+                
+                let listName = "StockList-" + result
+
                 try {
-                        await updateDoc(doc(fireStoreDB, "UserData", props.user.user.uid), {
-                        StockList : stockList
+                    await updateDoc(doc(fireStoreDB, "UserStockLists", props.user.user.uid + "LD"), {
+                        [listName] : stockList
                     })
+                } catch (e) {console.log("Error storing list: ", e); return}
+                try {
+                    await updateDoc(doc(fireStoreDB, "UserStockLists", props.user.user.uid + "LN"), {
+                        numLists : result +1
+                })
                 } catch (e) {console.log("Error storing list: ", e); return}
             }
 
         })
             
         
-        console.log(props.user);
+        //console.log(props.user);
     }
     
     return(
