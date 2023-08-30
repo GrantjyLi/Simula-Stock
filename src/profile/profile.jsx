@@ -1,29 +1,30 @@
 import React from 'react';
 import ProfileHeader from './profileHeader.jsx'
 import './Profile.css'
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth"
-import { auth } from '../firebase.js'
 
 export default function page({props}){
 
     return(
-        <div className= 'profileMain'>
+        <div>
             <ProfileHeader setUser = {props.setUser} pageName = {"Profile"}/>
 
             {!props.user &&
                 <div id = "NoProfile">
                     <h1>Please login to continue</h1>
-                    <button id = "loginBTN" onClick={()=>{props.login()}}>Login Here</button>
+                    <button id = "loginBTN" 
+                        onClick={async ()=>{ await props.login()}}>Login Here
+                    </button>
                 </div>
             }
-            {!props.user &&
-                <div className='profileMain'>
-
+            {props.user &&
+                <div id ='profileMain'>
+                    <div id = "stockLists">
+                        <h1>Current Watchlists</h1>
+                    </div>
 
                 </div>
             
             }
-            
             
         </div>
     )

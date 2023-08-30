@@ -39,12 +39,12 @@ export default function PageRouter(){
       try{
           let result = await signInWithPopup(auth, provider)
           setUser(result.user)
-          updatePic(result.user.photoURL)
+          if (updatePic !== undefined) updatePic(result.user.photoURL)
         
       }catch(error) {alert("Couldn't log in: ", error)}
     }
 
-    const props = {
+    const mainProps = {
       setUser : setUser,
       user : user,
       userExist : userExist,
@@ -56,9 +56,9 @@ export default function PageRouter(){
         <BrowserRouter> 
             <Routes>
                 
-                <Route index element = {<QTC props = {props}/>}/>
+                <Route index element = {<QTC props = {mainProps}/>}/>
 
-                <Route path="/profile" element = {<Profile props = {props}/>}/>
+                <Route path="/profile" element = {<Profile props = {mainProps}/>}/>
 
             </Routes>
         </BrowserRouter>

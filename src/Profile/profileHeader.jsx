@@ -4,7 +4,7 @@ import './profileHeader.css'
 import { signOut } from "firebase/auth"
 import { auth } from '../firebase.js'
 
-function Header({props}) {
+function Header(props) {
     const [openMenu, setOpen] = useState(false)
     const [profilePic, setprofilePic] = useState(defaultProfilePic)
     const Menu = ["Profile", "Login", "Logout"]
@@ -12,16 +12,18 @@ function Header({props}) {
     async function menu(option){
         switch(option){
             case "Login":
-                    props.login()
+                    props.mainProps.login()
                 break
             
-                case "Logout":
+            case "Logout":
                 try{
                     await signOut(auth)
-                    props.setUser(null)
+                    props.mainProps.setUser(null)
                     setprofilePic(defaultProfilePic)
                 }catch(error){alert("Couldn't log out: ", error)}
                 break
+            default:
+                alert("Couldn't log out/in at this time: ")
         }
     }
     
@@ -36,7 +38,6 @@ function Header({props}) {
                     
                 </div>
             </div>
-            
 
             {openMenu &&
                 <ul id = "profileDrop_down" 
@@ -45,10 +46,10 @@ function Header({props}) {
                 {Menu.map((option)=>(
                     <li id = "profiledropDownItem">
                         <button 
-                        id = "profiledropDownButton"
-                        onClick={()=>{menu(option)}}>{option}
+                            id = "profiledropDownButton"
+                            onClick={()=>{menu(option)}}>{option}
                         </button>
-                        </li>
+                    </li>
                     ))
                 }
             </ul>

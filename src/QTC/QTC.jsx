@@ -6,7 +6,7 @@ function App({props}) {
   
   return (
       <div className='Main'>
-        <Header props = {props}/>
+        <Header props = {props} pageName = {"Stock Searcher"}/>
         <SearchResult props = {props}/>
       </div>
   )
