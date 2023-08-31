@@ -71,23 +71,22 @@ function Results({props}) {
 
         //checking if user already has data
         props.userExist().then(async result =>{
-            if(result > 0){//result is the current number of lists
+            if(result >= 0){//result is the current number of lists
                 if (result > maxListNum){//max number of watch lists
                     alert("You have ran out of lists - " + maxListNum)
                     return
                 }
-                console.log(props.user.uid);
                 
                 let listName = "Watchlist-" + result
 
                 try {//add new entry to Watch List doc
-                    await updateDoc(doc(fireStoreDB, "UserStockLists", props.user.uid + "WL"), {
+                    await updateDoc(doc(fireStoreDB, "UserWatchLists", props.user.uid + "WL"), {
                         [listName] : stockList
                     })
                 } catch (e) {console.log("Error storing list: ", e); return}
                 try {//add new entry to number of list doc
-                    await updateDoc(doc(fireStoreDB, "UserStockLists", props.user.uid + "NL"), {
-                        numLists : result +1
+                    await updateDoc(doc(fireStoreDB, "UserWatchLists", props.user.uid + "NL"), {
+                        numLists : (result +1)
                 })
                 } catch (e) {console.log("Error storing list: ", e); return}
             }

@@ -1,15 +1,30 @@
-import React from 'react';
 import ProfileHeader from './profileHeader.jsx'
 import './Profile.css'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { fireStoreDB } from '../firebase.js';
 import {doc, getDoc} from 'firebase/firestore'
 
-export default function page({props}){
-    //const [watchLists, setWatchLists] = useState([])
+export default function Profile({props}){
+    const [watchLists, setWatchLists] = useState([{name: "asd"}])
 
-    //const docRef = doc(FireStoreDB, props.user.uid + "")
-    //setWatchLists = 
+    useEffect(() => {
+        
+        fetchWatchlists();
+        
+      }, [props.user]);
+    
+      async function fetchWatchlists() {
+        if (props.user) {
+          const docRef = doc(fireStoreDB, "UserWatchLists", props.user.uid + "WL");
+          try {
+              const docSnapshot = await getDoc(docRef); // Await the document snapshot
+              const docData = docSnapshot.data(); // Access the data from the snapshot
+              setWatchLists(docData);
+            } catch (error) {
+              alert("Error getting document:", error);
+            }
+        }
+      }
 
     return(
         <div>
@@ -27,9 +42,11 @@ export default function page({props}){
                 <div id ='profileMain'>
                     <div id = "stockLists">
                         <h1>Current Watchlists</h1>
-                        <div>
-
-                        </div>
+                            
+                        {watchLists.length > 0 &&
+                            watchLists.map(watchlist=> (
+                                <h1>{watchlist[0]}ge</h1>
+                            ))}
                     </div>
 
                 </div>

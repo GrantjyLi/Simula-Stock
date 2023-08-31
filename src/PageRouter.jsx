@@ -13,22 +13,24 @@ export default function PageRouter(){
   const userExist = async ()=>{
     const userRef = doc(fireStoreDB, "Users", user.uid);
     const docRef = await getDoc(userRef);
+    
     if(!docRef.exists()){
         try {
             await setDoc(userRef, {})
         } catch (e) {console.error("Error creating user profile: ", e); return -1}
         try {
-            await setDoc(doc(fireStoreDB, "UserStockLists", user.uid + "NL"), {numLists: 1})
+            await setDoc(doc(fireStoreDB, "UserWatchLists", user.uid + "NL"), {numLists: 0})
         } catch (e) {console.error("Error creating user list data: ", e); return -1}
         try {
-          await setDoc(doc(fireStoreDB, "UserStockLists", user.uid + "WL"), {})
+          await setDoc(doc(fireStoreDB, "UserWatchLists", user.uid + "WL"), {})
       } catch (e) {console.error("Error creating user list data: ", e); return -1}
     }
 
-    const numListDocRef = doc(fireStoreDB, "UserStockLists", user.uid + "NL")
+    const numListDocRef = doc(fireStoreDB, "UserWatchLists", user.uid + "NL")
     try {
       const numListData = await getDoc(numListDocRef);
       return numListData.data().numLists;
+    
     } catch (e) {
         console.error("Error getting numLists: ", e);
         return -1;
