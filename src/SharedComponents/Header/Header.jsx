@@ -12,15 +12,15 @@ function Header(props) {
     async function menu(option){
         switch(option){
             case "Login":
-                await props.props.login(setprofilePic)
+                await props.mainProps.login(setprofilePic)
                 break
             
             case "Logout":
                 try{
-                    await signOut(auth)
+                    signOut(auth)
                     props.mainProps.setUser(null)
                     setprofilePic(defaultProfilePic)
-                }catch(error){alert("Couldn't log out: ", error)}
+                }catch(error){console.log("Couldn't log out: ", error)}
                 break
             default:
                 alert("Couldn't log out/in at this time: ")

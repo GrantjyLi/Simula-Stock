@@ -7,7 +7,9 @@ import { fireStoreDB } from '../../../firebase.js'
 import { doc, updateDoc } from "firebase/firestore";
 
 const myKey = process.env.REACT_APP_12DAT_API_KEY
-function Results(props) {
+function Results({props}) {
+
+    const maxListNum = 5;
 
     //state elements
     const [searchText, setSearch] = useState("")
@@ -52,6 +54,7 @@ function Results(props) {
         }catch(error){alert("couldn't get data")}
     }
 
+    //remove ticker from current list
     function removeTicker(name){
         name = name.toLowerCase()
         setList((stocks) =>
@@ -59,38 +62,37 @@ function Results(props) {
         );
     }
 
+    //save current list to a new watchlist
     async function saveList(){
-        
         if (props.user == null){ //login check
             alert("Not logged in")
             return
         }
 
+        //checking if user already has data
         props.userExist().then(async result =>{
-            if(result >= 0){
-                if (result >= 3){
-                    alert("You have ran out of lists - 3")
+            if(result > 0){//result is the current number of lists
+                if (result > maxListNum){//max number of watch lists
+                    alert("You have ran out of lists - " + maxListNum)
                     return
                 }
+                console.log(props.user.uid);
                 
-                let listName = "StockList-" + result
+                let listName = "Watchlist-" + result
 
-                try {
-                    await updateDoc(doc(fireStoreDB, "UserStockLists", props.user.user.uid + "LD"), {
+                try {//add new entry to Watch List doc
+                    await updateDoc(doc(fireStoreDB, "UserStockLists", props.user.uid + "WL"), {
                         [listName] : stockList
                     })
                 } catch (e) {console.log("Error storing list: ", e); return}
-                try {
-                    await updateDoc(doc(fireStoreDB, "UserStockLists", props.user.user.uid + "LN"), {
+                try {//add new entry to number of list doc
+                    await updateDoc(doc(fireStoreDB, "UserStockLists", props.user.uid + "NL"), {
                         numLists : result +1
                 })
                 } catch (e) {console.log("Error storing list: ", e); return}
             }
 
         })
-            
-        
-        //console.log(props.user);
     }
     
     return(
