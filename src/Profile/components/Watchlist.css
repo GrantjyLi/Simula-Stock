@@ -1,0 +1,11 @@
+.WatchlistMain{
+    background-color: white;
+    display: flex;
+    border-radius: 45px;
+    width: 30vw;
+    margin: 20px;
+}
+#gainImage{
+    width: 50px;
+    height: 9px;
+}

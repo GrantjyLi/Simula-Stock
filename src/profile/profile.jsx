@@ -1,5 +1,6 @@
 import ProfileHeader from './profileHeader.jsx'
 import './Profile.css'
+import Watchlist from './components/Watchlist.jsx'
 import { useState, useEffect } from "react";
 import { fireStoreDB } from '../firebase.js';
 import {doc, getDoc} from 'firebase/firestore'
@@ -33,23 +34,26 @@ export default function Profile({props}){
             <ProfileHeader setUser = {props.setUser} pageName = {"Profile"}/>
 
             {!props.user &&
-                <div id = "NoProfile">
+                <div className = "NoProfile">
                     <h1>Please login to continue</h1>
                     <button id = "loginBTN" 
                         onClick={async ()=>{ await props.login()}}>Login Here
                     </button>
                 </div>
             }
+
             {props.user &&
-                <div id ='profileMain'>
+                <div className ='profileMain'>
                     <div id = "stockLists">
+                        <div id = "watchlistContainer">
                         <h1>Current Watchlists</h1>
-                            
-                        {(!loading) &&
-                            watchLists.map(watchlist=> (
-                                <h1>{watchlist[0].name}</h1>
-                             ))
-                            }
+
+                            {(!loading) &&
+                                watchLists.map((watchlist, index)=> (
+                                    <Watchlist watchlistData = {watchlist} index = {index}/>
+                                ))
+                                }
+                        </div>
                     </div>
 
                 </div>

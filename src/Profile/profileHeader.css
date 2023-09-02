@@ -4,7 +4,7 @@
 .profileHeader{
     background-color: white;
     color: black;
-    border-bottom: 3px solid #ececec;
+    box-shadow: 0 4px 2px -2px gray;
 
 }
 .profileHeaderMain{
