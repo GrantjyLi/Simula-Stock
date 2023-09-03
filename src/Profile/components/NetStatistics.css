@@ -1,0 +1,33 @@
+.NetStatisticsMain{
+    background-color: black;
+    width: 30vh;
+    height: 20vh;
+    border-radius: 45px;
+    font-size: 1.5vh;
+}
+#netGain{
+    background-image: linear-gradient(to bottom right, #00FF42, #3E363F);
+}
+#netLoss{
+    background-image: linear-gradient(to bottom right, #FF0000, #3E363F);
+}
+#netZero{
+    background-image: linear-gradient(to bottom right, #FFF500, #3E363F);
+}
+
+#topData{
+    display: flex;
+    padding-top: 2px;
+    justify-content: space-evenly;
+}
+#unrealizedData{
+    position: absolute;
+    bottom: 0px;
+}
+
+.description{
+    color: #333333;
+}
+.value{
+    color: #000000;
+}

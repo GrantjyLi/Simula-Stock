@@ -29,10 +29,9 @@ export default function Watchlist(props){
     return (
         <div className='WatchlistMain'>
             <img src={gainImage} alt="" id = "gainImage" />
-            
             <div id = "watchlistData">
-                <h2>Whatchlist {props.index}</h2>
-                <h2 id = "WLDescription">{WLDescription}</h2>
+                <h2 id = "WLName">Whatchlist {props.index}</h2>
+                <h2 id = "WLData">{WLDescription}</h2>
             </div>
         </div>
     )
