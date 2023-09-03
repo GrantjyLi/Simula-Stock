@@ -30,7 +30,8 @@ export default function NetStatistics({props}){
                 </div>
             </div>
             <div id = "unrealizedData" className='data'>
-                    <h2 className = "value">{netSign + gainPercent}%{netSign + gainAmount} USD</h2>
+                    <h2 className = "value">{netSign + gainPercent}%</h2>
+                    <h2 className = "value">{ netSign + gainAmount} USD</h2>
                     <h2 className = "description">in Unrealized {netWord}</h2>
             </div>
         </div>

@@ -22,6 +22,9 @@ function Header(props) {
                     setprofilePic(defaultProfilePic)
                 }catch(error){console.log("Couldn't log out: ", error)}
                 break
+            case "Profile":
+                window.location.replace(window.location.href + "profile")
+                break
             default:
                 alert("Couldn't log out/in at this time: ")
         }
