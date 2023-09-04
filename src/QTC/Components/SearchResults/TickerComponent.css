@@ -1,13 +1,12 @@
 .TickerComponent{
     margin: auto;
     width: 35vh;
-    height: 10vh;
     padding: 10px;
     margin-top: 10px;
     background-color: #d9d9d9;
     border-radius: 15px;
     border: none;
-    
+   
 }
 .topSection{
     display: flex;
@@ -32,16 +31,36 @@
     position: absolute;
 }
 
-#leftData{
-    width: 45%;
-    float: left;
-    padding-left: 2%;
+.data{
+    width: 44%;
     font-size: 1.25vh;
+    display: inline-block;
+    padding-left: 10px;
 }
 
-#rightData{
-    width: 50%;
-    float: right;
-    padding-right: 2%;
+#BuySell {
+    display: flex; 
+    align-items: center;
+    padding-bottom: 5px;
+}
+#volumeInput{
+    width: 5vh;
+    border-radius: 10px;
     font-size: 1.25vh;
+
+}
+#purchase{
+    padding-left: 10px;
+    font-size: 1.5vh;
+}
+.PlusMinus{
+    background-color: transparent;
+    border: solid 2px;
+    margin: 5px;
+    padding: 2px;
+    border-radius: 0;
+    font-size: 1.25vh;
+}
+.PlusMinus:active{
+    box-shadow: 2px;
 }
