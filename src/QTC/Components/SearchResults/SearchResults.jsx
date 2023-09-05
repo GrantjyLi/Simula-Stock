@@ -14,6 +14,7 @@ function Results({props}) {
     //state elements
     const [searchText, setSearch] = useState("")
     const [stockList, setList] = useState([])
+    const [amountInvested, setAmountInvested] = useState({})
 
     //getting data using api
     let priceURL;
@@ -35,14 +36,12 @@ function Results({props}) {
         //using Axios to get an API response
         try{
             const priceResponse = await Axios.get(priceURL);
-            
             if(priceResponse.data.code === 400){
                 alert(searchText + " was not found");
                 return
             }
 
             const dataResponse = await Axios.get(dataURL);
-
             //handling valid data return
             const arr = [...stockList, {
                 "name" : searchText, 
@@ -68,7 +67,7 @@ function Results({props}) {
             alert("Not logged in")
             return
         }
-
+        console.log(amountInvested);
         //checking if user already has data
         props.userExist().then(async result =>{
             if(result >= 0){//result is the current number of lists
@@ -116,7 +115,11 @@ function Results({props}) {
             <div className="DropDownMenu">
                 <div className="Items">
                     {stockList.map(stock =>(
-                        <TickerComponent ticker ={stock} exit = {removeTicker}/>
+                        <TickerComponent 
+                            ticker ={stock} 
+                            exit = {removeTicker} 
+                            setAmountInvested = {setAmountInvested}
+                            amountInvested = {amountInvested}/>
                     ))
                     }
 

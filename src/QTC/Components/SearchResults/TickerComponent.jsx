@@ -8,6 +8,7 @@ export default function TickerComponent(props){
     let ticker = props.ticker
     let exit = props.exit
     let currentData = ticker.data.values[0]
+    let symbol = ticker.data.meta.symbol
 
     const [volume, setVolume] = useState(0)
     const [orderVolume, setOrderVolume] = useState(0)
@@ -17,9 +18,9 @@ export default function TickerComponent(props){
     return(
         <div className="TickerComponent">
             <div className = "topSection">
-                <h1 id = "TickerName">{ticker.data.meta.symbol}</h1>
+                <h1 id = "TickerName">{symbol}</h1>
                 <img id = "arrow" src= {arrow}/>
-                <img id = "closeButton" src={closeIcon} onClick={()=>{exit(ticker.data.meta.symbol)}}/>
+                <img id = "closeButton" src={closeIcon} onClick={()=>{exit(symbol)}}/>
             </div>
 
             <div className= "dataInfo">
@@ -46,7 +47,10 @@ export default function TickerComponent(props){
                             else if (e.target.value > currentData.volume) setVolume(currentData.volume)
                             else setVolume(e.target.value)
                             }}/>
-                    <button  id = "confirmBTN" onClick={()=>{setOrderVolume(volume)}}>Confirm order</button>
+                    <button  id = "confirmBTN" onClick={()=>{
+                        setOrderVolume(volume)
+                        props.setAmountInvested(props.amountInvested.symbol = orderVolume)
+                        }}>Confirm order</button>
                 </div>
 
                 <h2 id = "setVolumeText">Order price: ${orderVolume * parseFloat(ticker.price)}</h2>
