@@ -10,6 +10,7 @@ export default function TickerComponent(props){
     let currentData = ticker.data.values[0]
 
     const [volume, setVolume] = useState(0)
+    const [orderVolume, setOrderVolume] = useState(0)
 
     let arrow
     (currentData.close > ticker.price)? arrow = upArrow : arrow = downArrow
@@ -36,13 +37,20 @@ export default function TickerComponent(props){
             </div>
             
             <div id = "BuySell">
-                <h2 id = "purchase">Purchase volume: </h2>
-                <input type="number" id = "volumeInput"
-                    value = {volume}
-                    onChange={(e)=>{
-                        if (e.target.value <0) setVolume(0)
-                        else setVolume(e.target.value)
-                        }}/>
+                <div id = "setVolume">
+                    <h2 id = "setVolumeText">Set purchase volume: </h2>
+                    <input type="number" id = "volumeInput"
+                        value = {volume}
+                        onChange={(e)=>{
+                            if (e.target.value <0) setVolume(0)
+                            else if (e.target.value > currentData.volume) setVolume(currentData.volume)
+                            else setVolume(e.target.value)
+                            }}/>
+                    <button  id = "confirmBTN" onClick={()=>{setOrderVolume(volume)}}>Confirm order</button>
+                </div>
+
+                <h2 id = "setVolumeText">Order price: ${orderVolume * parseFloat(ticker.price)}</h2>
+                
             </div>
         </div>
     )

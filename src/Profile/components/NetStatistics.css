@@ -7,13 +7,13 @@
     position: relative;
 }
 #netGain{
-    background-image: linear-gradient(to bottom right, #00FF42, #3E363F);
+    background-image: linear-gradient(to bottom right, rgba(0, 255, 66, 0.6), rgba(62,54,63,0.6));
 }
 #netLoss{
-    background-image: linear-gradient(to bottom right, #FF0000, #3E363F);
+    background-image: linear-gradient(to bottom right, rgba(255,0,0,0.6), rgba(62,54,63,0.6));
 }
 #netZero{
-    background-image: linear-gradient(to bottom right, #FFF500, #3E363F);
+    background-image: linear-gradient(to bottom right, rgba(255,245,0,0.6), rgba(62,54,63,0.6));
 }
 
 #topData{
