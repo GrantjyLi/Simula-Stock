@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import QTC from './QTC/QTC.jsx';
-import Profile from './Profile/Profile.jsx';
+import Profile from './Profile/profile.jsx';
 import { useState } from 'react';
 import { fireStoreDB, auth } from './firebase.js';
 import { doc, getDoc, setDoc } from "firebase/firestore";

@@ -1,7 +1,7 @@
 import ProfileHeader from './profileHeader.jsx'
 import NetStatistics from './components/NetStatistics.jsx'
 import Watchlist from './components/Watchlist.jsx'
-import './Profile.css'
+import './profile.css'
 import { useState, useEffect } from "react";
 import { fireStoreDB } from '../firebase.js';
 import {doc, getDoc} from 'firebase/firestore'
